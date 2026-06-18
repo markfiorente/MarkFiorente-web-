@@ -19,10 +19,28 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  /* ---------- Menú móvil (hamburguesa) ---------- */
+  var toggle = document.getElementById("navToggle");
+  function closeMenu() {
+    if (!nav) return;
+    nav.classList.remove("is-open");
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+  }
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeMenu();
+  });
+
   /* ---------- Scroll suave en anchors del nav ---------- */
   var navLinks = document.querySelectorAll('a[href^="#"]');
   navLinks.forEach(function (link) {
     link.addEventListener("click", function (e) {
+      closeMenu();
       var id = link.getAttribute("href");
       if (id === "#" || id.length < 2) return;
       var target = document.querySelector(id);

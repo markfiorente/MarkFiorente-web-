@@ -133,11 +133,6 @@ img { max-width: 100%; display: block; }
 }
 .nav__brand span { color: var(--c-second); }
 
-.nav__links {
-  display: none;
-  align-items: center;
-  gap: 1.75rem;
-}
 .nav__links a {
   font-size: 0.9rem;
   font-weight: 500;
@@ -155,8 +150,79 @@ img { max-width: 100%; display: block; }
 }
 .nav__cta:hover { border-color: var(--c-accent); }
 
+/* Botón hamburguesa (solo móvil) */
+.nav__toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--c-line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+}
+.nav__toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--c-text);
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+}
+.nav.is-open .nav__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav.is-open .nav__toggle span:nth-child(2) { opacity: 0; }
+.nav.is-open .nav__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Panel de enlaces en móvil */
+.nav__links {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 1rem var(--pad) 1.5rem;
+  background: rgba(10, 10, 15, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--c-line);
+  transform: translateY(-12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  display: flex;
+}
+.nav.is-open .nav__links {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.nav__links a { padding: 0.6rem 0; font-size: 1.05rem; }
+.nav__cta { margin-top: 0.5rem; }
+
 @media (min-width: 820px) {
-  .nav__links { display: flex; }
+  .nav__toggle { display: none; }
+  .nav__links {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 0;
+    background: none;
+    border: none;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .nav__links a { padding: 0; font-size: 0.9rem; }
+  .nav__cta { margin-top: 0; }
 }
 
 /* ---------- Hero ---------- */

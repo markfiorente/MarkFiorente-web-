@@ -91,15 +91,16 @@
   var scene = new THREE.Scene();
 
   /* ---------- Parámetros del flow field ---------- */
-  var TRAIL = 26;                 // puntos por línea (largo del trazo)
-  var NOISE_SCALE = 0.0016;       // escala espacial del ruido (suavidad)
-  var SPEED = 0.45;               // velocidad de avance (lenta)
+  var TRAIL = 90;                 // puntos por línea (largo del trazo)
+  var NOISE_SCALE = 0.0013;       // escala espacial del ruido (suavidad)
+  var SPEED = 0.6;                // velocidad de avance (lenta)
   var TIME_FLOW = 0.00006;        // deriva temporal del campo
-  var LINE_COLOR = 0x6fc1ed;      // azul claro secundario
+  var MAX_OPACITY = 0.22;         // pico de opacidad (rango brief 0.15–0.25)
+  var LINE_COLOR = new THREE.Color(0x6fc1ed); // azul claro secundario
 
   // Densidad baja: escala con el área pero con techo.
-  var count = Math.round((w * h) / 14000);
-  count = Math.max(40, Math.min(count, 140));
+  var count = Math.round((w * h) / 18000);
+  count = Math.max(34, Math.min(count, 110));
 
   var tracers = [];
 
@@ -112,14 +113,22 @@
 
   function createTracer() {
     var positions = new Float32Array(TRAIL * 3);
+    var colors = new Float32Array(TRAIL * 3);
+    // Degradado cabeza→cola (efecto cometa): la cabeza brilla, la cola se apaga.
+    // Con AdditiveBlending la intensidad del color actúa como opacidad efectiva.
+    for (var k = 0; k < TRAIL; k++) {
+      var fade = (1 - k / (TRAIL - 1)) * MAX_OPACITY;
+      colors[k * 3] = LINE_COLOR.r * fade;
+      colors[k * 3 + 1] = LINE_COLOR.g * fade;
+      colors[k * 3 + 2] = LINE_COLOR.b * fade;
+    }
     var geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
     var material = new THREE.LineBasicMaterial({
-      color: LINE_COLOR,
+      vertexColors: true,
       transparent: true,
-      // Opacidad baja dentro del rango del brief (0.15–0.25).
-      opacity: 0.15 + Math.random() * 0.1,
       blending: THREE.AdditiveBlending,
       depthTest: false,
       depthWrite: false
