@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarkFiorente — Desarrollo web, UX y estrategia digital</title>
+  <meta name="description" content="Mark Gómez (MarkFiorente): desarrollador web senior, especialista UX y asesor estratégico digital. El desarrollador que sigue ahí en la semana 8." />
+  <meta name="theme-color" content="#0a0a0f" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MarkFiorente — Desarrollo web, UX y estrategia digital" />
+  <meta property="og:description" content="El desarrollador que sigue ahí en la semana 8." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Fondo Three.js del hero -->
+  <canvas id="flowfield" aria-hidden="true"></canvas>
+
+  <!-- Navegación -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#hero" aria-label="MarkFiorente — inicio">
+      Mark<span>Fiorente</span>
+    </a>
+    <nav class="nav__links" aria-label="Navegación principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#casos">Casos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a class="nav__cta" href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__content">
+        <h1 class="hero__headline" data-reveal>El desarrollador que sigue ahí en la semana 8.</h1>
+        <p class="hero__subheadline" data-reveal>
+          Trabajo con startups que necesitan más que código — alguien que entienda, decida y permanezca.
+        </p>
+        <div class="hero__cta-wrap" data-reveal>
+          <a class="btn btn--outline" href="#contacto">Cuéntame qué estás construyendo</a>
+        </div>
+        <p class="hero__credit" data-reveal>+15 años de experiencia en desarrollo web y UX</p>
+      </div>
+      <a class="hero__scroll" href="#servicios" aria-label="Bajar a servicios">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- 2. SERVICIOS -->
+    <section class="section" id="servicios">
+      <div class="section__inner">
+        <header class="section__head">
+          <p class="section__eyebrow" data-reveal>Servicios</p>
+          <h2 class="section__title" data-reveal>Lo que hago, y por qué importa.</h2>
+        </header>
+
+        <div class="cards">
+          <article class="card" data-reveal>
+            <span class="card__index">01</span>
+            <h3 class="card__title">Desarrollo web de alto rendimiento</h3>
+            <p class="card__text">
+              Front-end sin frameworks innecesarios. Código que carga rápido, se mantiene
+              barato y sigue funcionando dentro de tres años. Sin deuda técnica heredada
+              de la moda del momento.
+            </p>
+          </article>
+
+          <article class="card" data-reveal>
+            <span class="card__index">02</span>
+            <h3 class="card__title">Experiencia &amp; UX</h3>
+            <p class="card__text">
+              Diseño de producto e interacción centrado en decisiones, no en adornos.
+              Cada pantalla justifica su existencia y guía a la persona hacia lo que
+              vino a hacer.
+            </p>
+          </article>
+
+          <article class="card" data-reveal>
+            <span class="card__index">03</span>
+            <h3 class="card__title">Estrategia digital</h3>
+            <p class="card__text">
+              Acompañamiento para decidir qué construir y en qué orden. Pienso contigo
+              antes de escribir la primera línea, y sigo cuando el roadmap cambia.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROCESO -->
+    <section class="section section--alt" id="proceso">
+      <div class="section__inner">
+        <header class="section__head">
+          <p class="section__eyebrow" data-reveal>Proceso</p>
+          <h2 class="section__title" data-reveal>Entender, decidir, construir, permanecer.</h2>
+        </header>
+
+        <ol class="process">
+          <li class="process__step" data-reveal>
+            <span class="process__num">01</span>
+            <h3 class="process__title">Entender</h3>
+            <p class="process__text">
+              Antes de proponer nada, escucho el negocio. Qué problema resuelves, para
+              quién, y qué pasa si no lo resuelves.
+            </p>
+          </li>
+          <li class="process__step" data-reveal>
+            <span class="process__num">02</span>
+            <h3 class="process__title">Decidir</h3>
+            <p class="process__text">
+              Convierto la ambigüedad en decisiones concretas. Qué se construye ahora,
+              qué espera, y qué no se hace.
+            </p>
+          </li>
+          <li class="process__step" data-reveal>
+            <span class="process__num">03</span>
+            <h3 class="process__title">Construir</h3>
+            <p class="process__text">
+              Implementación limpia, rápida y verificable. Entregas continuas, sin
+              sorpresas en la demo.
+            </p>
+          </li>
+          <li class="process__step" data-reveal>
+            <span class="process__num">04</span>
+            <h3 class="process__title">Permanecer</h3>
+            <p class="process__text">
+              En la semana 8, cuando el entusiasmo inicial pasó, sigo ahí. Itero, sostengo
+              y acompaño la evolución del producto.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. CASOS SELECCIONADOS -->
+    <section class="section" id="casos">
+      <div class="section__inner">
+        <header class="section__head">
+          <p class="section__eyebrow" data-reveal>Casos seleccionados</p>
+          <h2 class="section__title" data-reveal>Trabajo que sostiene el argumento.</h2>
+        </header>
+
+        <div class="cases">
+          <!-- TODO: reemplazar por caso real (título, resumen, resultado, link e imagen) -->
+          <article class="case" data-reveal>
+            <div class="case__media" aria-hidden="true"></div>
+            <div class="case__body">
+              <h3 class="case__title">Nombre del proyecto</h3>
+              <p class="case__text">
+                Resumen del reto y lo que construiste. Una o dos frases concretas, sin relleno.
+              </p>
+              <p class="case__result"><strong>Resultado:</strong> métrica o impacto medible</p>
+              <a class="case__link" href="#" aria-disabled="true">Ver caso →</a>
+            </div>
+          </article>
+
+          <!-- TODO: reemplazar por caso real -->
+          <article class="case" data-reveal>
+            <div class="case__media" aria-hidden="true"></div>
+            <div class="case__body">
+              <h3 class="case__title">Nombre del proyecto</h3>
+              <p class="case__text">
+                Resumen del reto y lo que construiste. Una o dos frases concretas, sin relleno.
+              </p>
+              <p class="case__result"><strong>Resultado:</strong> métrica o impacto medible</p>
+              <a class="case__link" href="#" aria-disabled="true">Ver caso →</a>
+            </div>
+          </article>
+
+          <!-- TODO: reemplazar por caso real -->
+          <article class="case" data-reveal>
+            <div class="case__media" aria-hidden="true"></div>
+            <div class="case__body">
+              <h3 class="case__title">Nombre del proyecto</h3>
+              <p class="case__text">
+                Resumen del reto y lo que construiste. Una o dos frases concretas, sin relleno.
+              </p>
+              <p class="case__result"><strong>Resultado:</strong> métrica o impacto medible</p>
+              <a class="case__link" href="#" aria-disabled="true">Ver caso →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SOBRE MÍ -->
+    <section class="section section--alt" id="sobre-mi">
+      <div class="section__inner about">
+        <div class="about__col">
+          <p class="section__eyebrow" data-reveal>Sobre mí</p>
+          <h2 class="section__title" data-reveal>Mark Gómez</h2>
+        </div>
+        <div class="about__col">
+          <p class="about__text" data-reveal>
+            Llevo más de 15 años construyendo en la web: desarrollo front-end senior,
+            diseño de experiencia y asesoría estratégica para equipos que quieren tomar
+            mejores decisiones digitales.
+          </p>
+          <p class="about__text" data-reveal>
+            No trabajo por encargos sueltos. Me involucro: entiendo el negocio, ayudo a
+            decidir y me quedo cuando el proyecto entra en la parte difícil. La semana 8
+            es donde se ve quién acompaña de verdad.
+          </p>
+          <p class="about__text about__muted" data-reveal>
+            También hago fotografía — un skill secundario que afina mi ojo, pero no el
+            centro de lo que ofrezco.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CONTACTO -->
+    <section class="section contact" id="contacto">
+      <div class="section__inner contact__inner">
+        <p class="section__eyebrow" data-reveal>Contacto</p>
+        <h2 class="contact__title" data-reveal>¿Qué estás construyendo?</h2>
+        <p class="contact__text" data-reveal>
+          Cuéntame el problema, el momento del proyecto y a dónde quieres llegar.
+          Respondo personalmente.
+        </p>
+        <a class="btn btn--solid" href="mailto:mark.fiorente@gmail.com?subject=Quiero%20construir%20algo" data-reveal>
+          mark.fiorente@gmail.com
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="footer__brand">Mark<span>Fiorente</span></span>
+    <span class="footer__note">Desarrollo web · UX · Estrategia digital</span>
+  </footer>
+
+  <!-- Dependencias CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Scripts propios -->
+  <script src="js/flowfield.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
