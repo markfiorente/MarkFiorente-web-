@@ -1,57 +1,44 @@
 # markfiorente.com
 
-Sitio estático de presentación profesional de **MarkFiorente** (Mark Gómez):
-desarrollo web senior, UX y estrategia digital.
+Sitio de presentación profesional de **MarkFiorente** (Mark Gómez): desarrollo
+web senior, UX y estrategia digital.
 
 ## Stack
 
-- HTML / CSS / JS **vanilla** — sin frameworks, bundlers ni CMS.
-- [Three.js](https://threejs.org/) (CDN) — fondo *flow field* animado del hero.
-- [GSAP](https://gsap.com/) + ScrollTrigger (CDN) — animaciones de entrada y reveals.
-- Ruido simplex implementado *inline* en `js/flowfield.js` (sin dependencias extra).
-
-## Estructura
-
-```
-index.html          Markup: nav + 6 secciones (Hero, Servicios, Proceso,
-                    Casos, Sobre mí, Contacto) + footer.
-css/styles.css      Estilos, mobile-first. Paleta en variables CSS (:root).
-js/flowfield.js     Fondo Three.js del hero (líneas que se dibujan solas).
-js/main.js          Animaciones GSAP, ScrollTrigger, nav y scroll suave.
-```
+- **HTML/CSS/JS vanilla** en un único archivo autocontenido: `index.html`.
+- [Three.js](https://threejs.org/) (CDN) — fondo de constelación de partículas.
+- [GSAP](https://gsap.com/) + ScrollTrigger (CDN) — animaciones y reveals.
+- Tipografía: Playfair Display + Inter (Google Fonts).
 
 ## Cómo verlo
 
-Abre `index.html` directamente en el navegador (doble clic). Los CDN y las rutas
-relativas funcionan en modo `file://`, así que no se requiere servidor local.
+Abre `index.html` directamente en el navegador (doble clic). Necesita conexión a
+internet para cargar las fuentes y las librerías desde su CDN.
 
-Si prefieres un servidor estático:
+O con un servidor estático local:
 
 ```bash
-python3 -m http.server 8000
-# luego abre http://localhost:8000
+python3 -m http.server 8000   # luego abre http://localhost:8000
 ```
 
-## Paleta
+## Marca
 
-| Variable        | Color     | Uso                       |
-|-----------------|-----------|---------------------------|
-| `--c-primary`   | `#454c9b` | Azul/violeta principal    |
-| `--c-accent`    | `#da3c8e` | Magenta acento            |
-| `--c-second`    | `#6fc1ed` | Azul claro secundario     |
-| `--c-bg`        | `#0a0a0f` | Fondo base                |
+| Token       | Color     | Uso                     |
+|-------------|-----------|-------------------------|
+| `--orange`  | `#ff7a1a` | Acento principal        |
+| `--warm`    | `#ffd0a6` | Texto cálido/destacado  |
+| `--bg`      | `#111214` | Fondo base              |
+| `--surface` | `#1c1e20` | Tarjetas / superficies  |
 
-## Contenido pendiente (TODO)
+## Contacto
 
-- **Casos seleccionados** (`index.html`, sección `#casos`): hay 3 tarjetas
-  placeholder marcadas con `<!-- TODO -->`. Reemplazar título, resumen, resultado,
-  enlace e imagen (`.case__media`) por proyectos reales.
-- **Sobre mí** y **Contacto**: copy provisional en tono de marca; ajustar datos
-  cuando estén definidos.
+- Email: **hablemos@markfiorente.com**
+- WhatsApp: botón flotante → **+57 316 473 7941**
 
-## Accesibilidad
+## Pendientes (TODO)
 
-- Respeta `prefers-reduced-motion`: si está activo, no se inicia la animación 3D
-  y el contenido se muestra sin animaciones, totalmente legible.
-- El render del hero se pausa cuando la sección sale del viewport o la pestaña
-  queda en segundo plano.
+- **Proyectos**: los 3 casos usan copy de ejemplo; reemplazar por proyectos reales
+  (y enlazarlos si corresponde).
+- **Redes**: los enlaces de LinkedIn y GitHub apuntan a `#`; poner las URLs reales.
+- **Formulario**: hoy solo muestra confirmación en el cliente (no envía). Conectar
+  a un servicio (por ejemplo Formspree) o dejar el contacto por email/WhatsApp.
