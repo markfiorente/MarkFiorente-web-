@@ -112,6 +112,24 @@
     .nav-cta::after{display:none!important;}
     .nav-cta:hover{background:var(--orange)!important;color:var(--bg)!important;border-color:var(--orange)!important;}
 
+    /* NAV TOGGLE (hamburguesa — solo móvil) */
+    .nav-toggle{
+      display:none;flex-direction:column;justify-content:center;gap:5px;
+      width:44px;height:44px;padding:0;
+      border:1px solid var(--border);border-radius:2px;
+      background:rgba(255,255,255,.02);cursor:pointer;
+      position:relative;z-index:var(--z3);
+    }
+    .nav-toggle span{
+      display:block;width:20px;height:1.5px;margin:0 auto;
+      background:var(--text);
+      transition:transform .3s var(--spring),opacity .2s ease;
+    }
+    #nav.menu-open .nav-toggle span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+    #nav.menu-open .nav-toggle span:nth-child(2){opacity:0;}
+    #nav.menu-open .nav-toggle span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+    body.no-scroll{overflow:hidden;}
+
     /* HERO */
     #hero{
       position:relative;z-index:var(--z1);
@@ -418,7 +436,27 @@
     @media(max-width:768px){
       #nav{padding:16px 24px;}
       #nav.scrolled{padding:12px 24px;}
-      .nav-links{display:none;}
+      .nav-toggle{display:inline-flex;}
+      .nav-links{
+        display:flex;position:fixed;inset:0;z-index:var(--z2);
+        flex-direction:column;justify-content:center;align-items:flex-start;
+        gap:6px;padding:0 32px;
+        background:rgba(17,18,20,.98);
+        backdrop-filter:blur(24px) saturate(1.4);
+        -webkit-backdrop-filter:blur(24px) saturate(1.4);
+        transform:translateY(-100%);
+        transition:transform .55s var(--spring);
+      }
+      #nav.menu-open .nav-links{transform:translateY(0);}
+      .nav-links a{
+        font-family:var(--serif);font-size:1.625rem;font-weight:700;
+        color:var(--text);letter-spacing:-.015em;padding:14px 0;
+      }
+      .nav-links a::after{display:none;}
+      .nav-cta{
+        font-size:.8rem!important;margin-top:24px;
+        padding:14px 28px!important;color:var(--orange)!important;
+      }
       /* Hero: padding-top = nav height, padding-bottom = breathing room */
       #hero{padding:80px 24px 80px;}
       /* Ocultar scroll hint en mobile — decorativo y conficto con KPI */
@@ -456,13 +494,16 @@
 <!-- NAV -->
 <nav id="nav" role="navigation" aria-label="Navegación principal">
   <a href="#hero" class="nav-logo">Mark<b>Fiorente</b></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#proceso">Proceso</a></li>
     <li><a href="#casos">Proyectos</a></li>
     <li><a href="#sobre">Sobre mí</a></li>
     <li><a href="#contacto" class="nav-cta">Hablemos</a></li>
   </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -741,7 +782,7 @@
 <!-- FOOTER -->
 <footer>
   <span class="flogo">Mark<b>Fiorente</b></span>
-  <span class="fcopy">© 2025 MarkFiorente. Todos los derechos reservados.</span>
+  <span class="fcopy">© 2026 MarkFiorente. Todos los derechos reservados.</span>
 </footer>
 
 <!-- WHATSAPP FLOTANTE (colores de marca) -->
@@ -829,6 +870,20 @@ gsap.registerPlugin(ScrollTrigger);
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
 
+/* Menú móvil */
+const navToggle = document.getElementById('nav-toggle');
+function closeMenu(){
+  nav.classList.remove('menu-open');
+  navToggle.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('no-scroll');
+}
+navToggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('menu-open');
+  navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.body.classList.toggle('no-scroll', open);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
 /* Hero */
 gsap.timeline({ delay: 0.15 })
   .to('.hero-eyebrow', { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' })
@@ -901,18 +956,33 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const t = document.querySelector(a.getAttribute('href'));
     if (!t) return;
     e.preventDefault();
+    closeMenu();
     window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
   });
 });
 
-/* Form */
+/* Form — abre el cliente de correo hacia hablemos@markfiorente.com con los datos */
 document.querySelector('.cform').addEventListener('submit', e => {
   e.preventDefault();
-  const btn = e.target.querySelector('.fbtn');
+  const form = e.target;
+  const name    = form.querySelector('#cn').value.trim();
+  const email   = form.querySelector('#ce').value.trim();
+  const message = form.querySelector('#cm').value.trim();
+
+  if (!name || !email || !message) {
+    form.querySelector(!name ? '#cn' : !email ? '#ce' : '#cm').focus();
+    return;
+  }
+
+  const subject = encodeURIComponent('Nuevo mensaje desde markfiorente.com — ' + name);
+  const body    = encodeURIComponent('Nombre: ' + name + '\nEmail: ' + email + '\n\n' + message);
+  window.location.href = 'mailto:hablemos@markfiorente.com?subject=' + subject + '&body=' + body;
+
+  const btn = form.querySelector('.fbtn');
   const orig = btn.innerHTML;
-  btn.textContent = 'Enviado — te respondo pronto';
-  btn.style.cssText = 'border-color:#4ade80;color:#4ade80';
-  setTimeout(() => { btn.innerHTML = orig; btn.style.cssText = ''; }, 4000);
+  btn.textContent = 'Abriendo tu correo…';
+  btn.style.cssText = 'border-color:var(--orange);color:var(--orange)';
+  setTimeout(() => { btn.innerHTML = orig; btn.style.cssText = ''; }, 4500);
 });
 </script>
 </body>
